@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - HOMI</title>
+    <link rel="stylesheet" href="cart.css">
+    <link rel="icon" href="img/Logo.png"> <!-- Ensure this path is correct -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+<nav>
+    <p style="width: 39%; text-align: center; color: white; font-size: 30px;">
+        <i style="color: #ffffff; margin-left: -29px;"></i> Cart
+    </p>
+    <div class="header">  
+            <a href="index.html">Home</a>
+    </div>
+</nav>
+<div class="main-9">
+    <div class="main-div">
+        <div class="main">
+            <p id="status">Cart </p>
+            <div class="container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product Name</th>
+                            <th>Q</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items">
+                        <!-- Cart items will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="pay">
+        <a id="checkout-link" href="checkout.html"><button class="btn btnn">Go To Checkout</button></a>
+        <div class="pay-detail">
+            <p style=" font-size: 19px; font-weight: 700; padding-top: 29px;">Order Summary</p>
+            <div style="display: flex; width: 100%;justify-content: space-between;">
+                <p>Subtotal</p>
+                <div class="payment">
+                    <p class="rup">₹</p>
+                    <p class="amt" id="subtotal">0</p>
+                </div>
+            </div>
+            <div style="display: flex;justify-content:space-between; ">
+                <p>Delivery charges</p>
+                <div class="payment">
+                    <p class="rup">₹</p>
+                    <p class="amt" id="delivery-charges">0</p>
+                </div>
+            </div>
+            <div style="display: flex;justify-content:space-between; ">
+                <p>Estimated Total</p>
+                <div class="payment">
+                    <p class="rup">₹</p>
+                    <p class="amt" id="estimated-total">0</p>
+                </div>
+            </div>
+        </div>
+        <p style="margin-top: 20px; cursor: pointer; padding-bottom: 29px;">Have a Promo code?</p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Retrieve cart items from localStorage
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        let subtotal = 0;
+        let deliveryCharges = 0;
+
+        // Reference to the tbody element where cart items will be appended
+        const cartItemsContainer = document.getElementById('cart-items');
+        const statusParagraph = document.getElementById('status');
+
+        // Check if cart is empty or not
+        if (cartItems.length === 0) {
+            statusParagraph.textContent = "Cart Is Empty"; // Display "Cart Is Empty" when no items exist
+        } else {
+            statusParagraph.textContent = "Cart"; // Display "Cart" when items exist
+        }
+
+        // Loop through the cart items and populate the table
+        cartItems.forEach(item => {
+            // Check if item properties are defined
+            if (item.name && item.price && item.image) {
+                const row = document.createElement('tr');
+                const total = item.price * item.quantity;
+                subtotal += total;
+                row.innerHTML = `
+                    <td><img src="${item.image}" alt=""></td>
+                    <td>${item.name}</td>
+                    <td>${item.quantity}</td>
+                    <td>₹${total}</td>
+                    <td><button onclick="removeItem('${item.name}')">Remove</button></td>
+                `;
+                cartItemsContainer.appendChild(row);
+            }
+        });
+
+        // Update subtotal, delivery charges, and estimated total
+        document.getElementById('subtotal').innerText = subtotal;
+        document.getElementById('delivery-charges').innerText = deliveryCharges;
+        document.getElementById('estimated-total').innerText = subtotal + deliveryCharges;
+
+        // Get reference to the checkout link
+        const checkoutLink = document.getElementById('checkout-link');
+
+        // If cart is empty, prevent opening checkout.html
+        if (cartItems.length === 0) {
+            checkoutLink.removeAttribute('href');
+            checkoutLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default action of clicking on a link
+                alert('Your cart is empty! Please add items to proceed to checkout.');
+            });
+        }
+    });
+
+    // Function to remove item from cart
+    function removeItem(itemName) {
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        // Filter out the item to remove
+        cartItems = cartItems.filter(item => item.name !== itemName);
+        // Update localStorage
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        // Refresh the page to reflect the changes
+        location.reload();
+    }
+</script>
+
+
+</body>
+</html>

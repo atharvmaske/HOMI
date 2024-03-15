@@ -1,0 +1,248 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+.span{
+    color: #fff;
+}
+body
+
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(img/bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.logo{
+    border-radius: 59px;
+}
+nav{
+    background-color: rgb(181, 192, 176,.5);
+    border: 1px solid rgba(255, 255, 255, .5);
+    display: flex;
+    height: 79px;
+    align-items: center;
+    justify-content: space-evenly;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+}
+.input{
+    border-radius: 25px;
+    border: 1px solid black;
+    width: 40%;
+    background-color: rgb(181, 192, 176);
+}
+nav a{
+    text-decoration: none;
+    margin-right: 30px;
+    color: black;
+    display: inline-block;
+    position: relative;
+}
+.input-field{
+    border-bottom-left-radius: 25px ;
+    border-top-left-radius: 25px ;
+    height: 35px;
+    border: none;
+    padding-left: 30px;
+    width: 86%;
+    font-size: 20px;
+}
+.input-field:focus{
+    outline: none;
+}
+.header{
+    display: flex;
+    justify-content: space-evenly;
+}
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0px;
+    left: 0;
+    background-color: white;
+    transform-origin: bottom right;
+    transition: transform 0.35s ease-out;
+}
+nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}.cart-button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+.navbar1{
+    display: none;
+}
+.Credentials{
+    margin-right: 590px;
+    font-size: 30px;
+    color: #fff;
+}
+.box
+{
+    margin-top: 90px;
+    padding: 20px 30px;
+    width: 300px;
+    height: 629px;
+    backdrop-filter: blur(50px);
+    border-radius: 5px;
+    background: rgba(49, 49, 49, .2);
+    border: 1px solid rgba(255, 255, 255, .5);
+}
+.box .form
+{
+    padding: 10px 20px;
+}
+.box .form h2
+{
+    text-align: center;
+    color: #fff;
+}
+.box .form form
+{
+    margin-top: 50px;
+    align-items: center;
+}
+.box .form form .inputbox input
+{
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    background: none;
+    border-bottom: 1px solid #12151e;
+    margin-bottom: 30px;
+    color: #fff;
+}
+.box .form form .inputbox span
+{
+    position: absolute;
+    transform: translateY(-80px);
+    font-size: 14px;
+    color: #fff;
+}
+/* Style for dropdown list */
+.box .form form .inputbox select {
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    background: none;
+    border-bottom: 1px solid #12151e;
+    margin-bottom: 30px;
+    color: #fff;
+    width: 100%;
+}
+
+.box .form form .inputbox select option {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+.sub{
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    outline: none;
+    background: #0cc0df;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.box .form form .sub
+{
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    outline: none;
+    background: #0cc0df;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+@media (max-width: 480px) {
+    nav {
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        height: auto;
+        padding: 10px 0;
+        
+    }
+    
+    .input {
+        display: flex;
+        width: 70%;
+        margin-bottom: 15px;
+    }
+    .fa-magnifying-glass{
+        padding-top: 17px;
+    }
+    .category {
+        flex-basis: calc(25% - 20px); 
+        max-width: calc(25% - 20px); 
+        text-align: center;
+        margin-right: 20px;
+    }
+    .header{
+        width: 100%;
+    }
+    .Credentials{
+        background-color: #5379eb;
+        font-size: 29px; 
+        margin: 0px;
+        border-radius: 20px;
+        padding: 5px;
+        color: #fff;
+
+    }
+    .header a{
+        font-size: 19px;
+    }
+    .category:last-child {
+        margin-right: 0; 
+    }
+
+    .category img {
+        max-width: 100%;
+    }
+    .input-field {
+        width: 100%;
+    }
+    .logo{
+        display: none;
+    }
+    .header a{
+        padding-left: 50px;
+    }
+    .header a {
+        margin: 5px 0;
+    }
+
+    .cart-button {
+        margin-top: 15px;
+    }
+    .items{
+        padding: 0px;
+    }
+    .body {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 190px;
+        padding: 0px;
+        padding-top: 170px;
+        margin: 0px;
+    }
+
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credentials</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/Logo.png"> <!-- Ensure this path is correct -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <img class="logo" width="150px" src="img/Logo.png" alt="">
+        <p style="width: 39%; text-align: center; color: white; font-size: 30px;">
+            <p class="Credentials">Credentials</p>
+        </p>
+        <div class="header">
+            <a href="cart.html">Cart</a>
+            <div style="display: block; width: 45%;">
+                <a href="index.html">Home</a>
+            </div>
+        </div>
+    </nav>
+    <div class="box">
+        <div class="form">
+            <h2>Credentials Form</h2>
+            <form id="credentialsForm">
+                <div class="inputbox">
+                    <input type="text" value="" id="phone" required>
+                    <span>Phone Number</span>
+                </div>
+                <div class="inputbox">
+                    <input type="text" value="" id="address" required>
+                    <span>Address</span>
+                </div>
+                <div class="inputbox">
+                    <input type="text" value="" id="BOTtoken" required>
+                    <span>BOTtoken</span>
+                </div>
+                <div class="inputbox">
+                    <input type="text" value="" id="BOTID" required>
+                    <span>BOT ID</span>
+                </div>
+                <div class="inputbox">
+                    <input type="text" value="" id="WIFIname" required>
+                    <span>WIFI name</span>
+                </div>
+                <div class="inputbox">
+                    <input type="text" value="" id="WIFIPassword" required>
+                    <span>WIFI Password</span>
+                </div>
+                <div class="inputbox">
+                    <select id="productType" required>
+                        <option value="HOMI BoT (telegram integration)">HOMI BoT (telegram integration)</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                    <br>
+                    <span>Product Type</span>
+                </div>
+                <div>
+                </div>
+                <input type="submit" value="Submit" class="sub" id="submit">
+            </form>
+        </div>
+    </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyADlzx1e-oLfpYbdVZDYHdhxskniKdHnpQ",
+            authDomain: "homi-efd2a.firebaseapp.com",
+            projectId: "homi-efd2a",
+            storageBucket: "homi-efd2a.appspot.com",
+            messagingSenderId: "139055619010",
+            appId: "1:139055619010:web:612c9d746218d836f4945b",
+            measurementId: "G-77DMEN2CLB"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        // Get reference to database service
+        const db = getDatabase(app);
+
+        // Function to handle form submission
+        document.getElementById("credentialsForm").addEventListener('submit', function(e) {
+            e.preventDefault();
+            const productName = document.getElementById("phone").value.replace(/[.#$[\]]/g, ''); // Remove invalid characters from phone number
+
+            // Create an object to store user credentials and cart items
+            const userData = {
+                phone: document.getElementById("phone").value,
+                address: document.getElementById("address").value,
+                BOTtoken: document.getElementById("BOTtoken").value,
+                BOTID: document.getElementById("BOTID").value,
+                WIFIname: document.getElementById("WIFIname").value,
+                WIFIPassword: document.getElementById("WIFIPassword").value,
+                productType: document.getElementById("productType").value, // Get the selected product type
+                hasItemsInCart: true // Indicate that there is 1 item in the cart
+            };
+
+            // Upload user data to Firebase
+            set(ref(db, 'user/' + productName), userData)
+                .then(() => {
+                    alert("Login Successful!");
+                })
+                .catch((error) => {
+                    console.error("Error uploading user data: ", error);
+                    alert("Error uploading user data. Please try again.");
+                });
+        });
+    </script>
+</body>
+</html>

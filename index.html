@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOMI</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="icon" href="img/logo.png">
+    <script src="home.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+<nav>
+    <a href="#">
+        <img class="logo" width="120px" src="img/Logo.png" alt="">
+    </a>
+    <div class="input">
+        <input class="input-field" id="search-input" type="text" placeholder="Search">
+        <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: #000000; padding-left: 5px;"></i>
+    </div>
+    <div class="header">
+        <a href="cart.html">          
+            <div style="display: block; margin-left: 0px;">    
+                <i class="fa badge fa-lg" id="cart-icon">&#xf07a;</i>
+            </div>
+        </a>
+    </div>
+</nav>
+<div class="items" id="item-container">
+    <div class="item" category="mobile" >
+        <img src="img/mqucbm7r.png" alt="">
+        <div class="info">
+            <p class="name">HOMI BoT (telegram integration)</p>
+            <p class="price"></p>
+            <p class="spec">"An IoT home security system utilizing motion detection, facial recognition, and fire detection, with notifications sent via Telegram."</p>
+        </div>
+        <Button onclick="addToCart('HOMI BoT (telegram integration)', 2999, 'img/mqucbm7r.png')" class="btn1">Add to cart</Button>
+    </div>
+
+<div class="item" category="mobile" >
+    <img src="img/smart-home-2005993_1280.webp" alt="">
+    <div class="info">
+        <p class="name">SmartNest (Intelligent Home Automation)</p>
+        <p class="price"></p>
+        <p class="spec">Your home's intelligent guardian, streamlining comfort and efficiency through advanced automation.    
+            <br>
+            <br>
+        </p>
+    </div>
+    <Button class="btn1">Comming soon</Button>
+</div>
+<div class="item" category="mobile" >
+    <img src="img/park.avif" alt="">
+    <div class="info">
+        <p class="name">ParkSense</p>
+        <p class="price">₹ 1,999</p>
+        <p class="spec">ParkSense: Your intelligent parking companion. Find spots with ease and manage parking effortlessly. @ParkSenseApp<br>
+        <br></p>
+    </div>
+    <Button class="btn1">Comming soon</Button>
+</div>    
+</div>
+</div>
+</div>
+<script>
+    function addToCart(itemName, itemPrice, itemImage) {
+        // Retrieve cart items from localStorage or initialize an empty array
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        
+        // Check if the item is already in the cart
+        const existingItemIndex = cartItems.findIndex(item => item.name === itemName);
+        
+        if (existingItemIndex !== -1) {
+            // If item is already in the cart, alert the user
+            alert("This item is already in your cart.");
+            return;
+        }
+
+        // Add the new item to the cart
+        cartItems.push({
+            name: itemName,
+            price: itemPrice,
+            image: itemImage,
+            quantity: 1 // Assuming initial quantity is 1
+        });
+
+        // Store updated cart items back to localStorage
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        
+        // Alert user that item is added to cart (optional)
+        alert("Item added to cart!");
+    }
+</script>
+</body>
+</html>
